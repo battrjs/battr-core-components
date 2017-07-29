@@ -1,16 +1,21 @@
-import { component, parse, compileExpression } from '@battr/battr-core';
+import { component, parse, compileExpression, doNotParse } from '@battr/battr-core';
 
 component.define({
   selector: '[if]',
   priority: 100,
   model: false,
+  compile: compile,
   controller: controller
 });
 
-function controller(element, attrs, model) {
+function compile(element) {
+  doNotParse(element.getAttributeNode('if'));
+}
+
+function controller(element, model) {
   var active = true;
   var parent = element.parentNode;
-  var ifExpression = compileExpression(attrs.getAttribute('if'));
+  var ifExpression = compileExpression(element.getAttribute('if'));
   var placeholder = document.createComment(' if="'+element.getAttribute('if')+'" ');
   placeholder.uid = element.uid;
   placeholder.mcplaceholder = true;

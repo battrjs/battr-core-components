@@ -20,7 +20,7 @@ function compile(element) {
   doNotParse(element);
 }
 
-function controller(element, attrs, model) {
+function controller(element, model) {
   var list = [];
   var elements = {};
   var attrValue = element.getAttribute('for');
@@ -37,6 +37,7 @@ function controller(element, attrs, model) {
   element.remove();
 
   model.$observe(listName, function (value) {
+    console.log('sdfsdfsdfdsfsdf')
     if (list.length !== value.length || !util.equal(list, value)) { updateList(value); }
   });
 
@@ -50,7 +51,7 @@ function controller(element, attrs, model) {
         tempList.push(elements[key].item);
         // trigger model if item has changed
         if (!util.equal(elements[key].item, elements[key].model[itemName])) {
-          elements[key].model.$assign(itemName, util.clone(elements[key].item));
+          elements[key].model[itemName] = util.clone(elements[key].item);
         }
       }
     });
@@ -94,7 +95,7 @@ function controller(element, attrs, model) {
       item: item,
       model: elModel
     };
-    elModel.$assign(itemName, util.clone(item));
+    elModel[itemName] = util.clone(item);
     bindModelToElement(el, elModel);
     return el;
   }

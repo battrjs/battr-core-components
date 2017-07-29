@@ -1,15 +1,21 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  battrComponents.init();
+  battrCoreComponents.init();
 });
 
-battrComponents.controller('AppController', function (model) {
-  model.$assign('showit', false);
-  var list = getList(100);
-  model.$assign('list', list);
+battrCoreComponents.controller('AppController', function (model) {
+  model.name = 'Ben Rubin';
+  model.showit = false;
+  var list = getList(10);
+  model.list = list;
 
   setTimeout(function () {
-    model.$assign('showit', true);
+    model.showit = true;
   }, 1000);
+
+
+  this.clickTest = function (e) {
+    console.log('hello', e)
+  };
 });
 
 
@@ -27,3 +33,10 @@ function getList(length) {
   }
   return arr;
 }
+
+
+
+// battrCoreComponents.controller('AppController', Controller);
+// export function Controller() {
+//
+// };

@@ -10,6 +10,4 @@ paths.styles.all = [
   'node_modules/@battr/battr-core/src/**/*.scss'
 ];
 require('@battr/battr-build');
-
-
 gulp.task('default', ['start-debug'])
