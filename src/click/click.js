@@ -11,11 +11,10 @@ function compile(element) {
   doNotParse(element.getAttributeNode('click'));
 }
 
-function postBind(element, ctrl) {
-  if (!ctrl) { return; }
+function postBind(element, model) {
   var clickExpression = compileExpression(element.getAttribute('click'));
   element.addEventListener('click', function (event) {
     var context = { $event: event };
-    clickExpression(util.extend(context, ctrl));
+    clickExpression(util.extend(context, model));
   });
 }
